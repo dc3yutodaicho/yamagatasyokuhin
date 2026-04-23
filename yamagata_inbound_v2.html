@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山形インバウンド安全・観光プラットフォーム — 新規事業提案</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap');
+
+  :root {
+    --ink: #1a1a18;
+    --ink-sub: #4a4a44;
+    --ink-mute: #8a8a82;
+    --paper: #f8f6f0;
+    --paper-warm: #f0ede4;
+    --accent: #1a5c3a;
+    --accent-light: #e8f4ed;
+    --accent-mid: #2d7a52;
+    --danger: #8b2020;
+    --danger-light: #fdf0f0;
+    --amber: #7a5200;
+    --amber-light: #fdf6e3;
+    --blue: #1a3a5c;
+    --blue-light: #eef4fb;
+    --purple: #3a1a5c;
+    --purple-light: #f0eefb;
+    --border: #ddd9ce;
+    --border-strong: #c5bfb0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 14px;
+  }
+
+  nav {
+    position: sticky; top: 0;
+    background: var(--ink); color: #fff;
+    padding: 0 32px;
+    display: flex; align-items: center; gap: 4px;
+    z-index: 100; height: 48px;
+    overflow-x: auto; white-space: nowrap;
+  }
+  nav a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 12px; padding: 6px 10px; border-radius: 4px; transition: all 0.15s; letter-spacing: 0.03em; }
+  nav a:hover { background: rgba(255,255,255,0.12); color: #fff; }
+  nav .sep { color: rgba(255,255,255,0.2); font-size: 10px; }
+
+  .page-header {
+    background: var(--ink); color: #fff;
+    padding: 56px 48px 48px;
+    position: relative; overflow: hidden;
+  }
+  .page-header::before { content: ''; position: absolute; top: -60px; right: -60px; width: 300px; height: 300px; border: 1px solid rgba(255,255,255,0.06); border-radius: 50%; }
+  .page-header::after { content: ''; position: absolute; bottom: -80px; right: 80px; width: 200px; height: 200px; border: 1px solid rgba(255,255,255,0.04); border-radius: 50%; }
+  .header-kicker { font-size: 11px; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 12px; text-transform: uppercase; }
+  .header-title { font-family: 'Noto Serif JP', serif; font-size: 32px; font-weight: 700; line-height: 1.3; margin-bottom: 16px; }
+  .header-vision { font-size: 15px; color: rgba(255,255,255,0.75); max-width: 600px; line-height: 1.8; border-left: 2px solid var(--accent-mid); padding-left: 16px; margin-bottom: 32px; }
+  .header-meta { display: flex; gap: 32px; flex-wrap: wrap; }
+  .meta-label { font-size: 10px; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+  .meta-val { font-size: 13px; color: rgba(255,255,255,0.85); margin-top: 2px; }
+
+  section { max-width: 960px; margin: 0 auto; padding: 56px 32px; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 32px; }
+  .section-num { font-size: 11px; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+  .section-title { font-family: 'Noto Serif JP', serif; font-size: 22px; font-weight: 700; color: var(--ink); }
+
+  .card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; }
+  .card-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .card-body { font-size: 13px; color: var(--ink-sub); line-height: 1.75; }
+
+  .tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 20px; }
+  .tag-green { background: var(--accent-light); color: var(--accent); }
+  .tag-red { background: var(--danger-light); color: var(--danger); }
+  .tag-amber { background: var(--amber-light); color: var(--amber); }
+  .tag-blue { background: var(--blue-light); color: var(--blue); }
+  .tag-gray { background: var(--paper-warm); color: var(--ink-sub); }
+  .tag-purple { background: var(--purple-light); color: var(--purple); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+  @media(max-width:700px) { .grid-2,.grid-3,.grid-4 { grid-template-columns: 1fr; } }
+
+  .lc-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; }
+  .lc-cell { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; min-height: 160px; }
+  .lc-cell.tall { min-height: 340px; }
+  .lc-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 8px; }
+  .lc-content { font-size: 12px; color: var(--ink-sub); line-height: 1.7; }
+  .lc-content li { list-style: none; padding-left: 12px; position: relative; margin-bottom: 4px; }
+  .lc-content li::before { content: "—"; position: absolute; left: 0; color: var(--accent); font-size: 10px; }
+  .lc-content strong { color: var(--ink); font-weight: 700; }
+  .lc-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 1px; background: var(--border-strong); }
+  .tl-item { position: relative; margin-bottom: 32px; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot { position: absolute; left: -28px; top: 4px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--accent); background: var(--paper); }
+  .tl-dot.active { background: var(--accent); }
+  .tl-phase { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .tl-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .tl-body { font-size: 13px; color: var(--ink-sub); margin-bottom: 10px; }
+  .tl-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+  .action-chip { font-size: 11px; background: var(--paper-warm); border: 1px solid var(--border); border-radius: 4px; padding: 4px 10px; color: var(--ink-sub); }
+
+  .issue-row { display: grid; grid-template-columns: 120px 1fr 90px 160px; gap: 12px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .issue-row.header { font-weight: 700; font-size: 10px; color: var(--ink-mute); padding-top: 0; text-transform: uppercase; letter-spacing: 0.05em; }
+  .issue-row:last-child { border-bottom: none; }
+
+  .gov-match { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 16px; align-items: center; margin-bottom: 12px; }
+  .gov-left { background: var(--blue-light); border: 1px solid #c5d8ed; border-radius: 6px; padding: 12px 14px; font-size: 12px; color: var(--blue); }
+  .gov-arrow { text-align: center; font-size: 18px; color: var(--ink-mute); }
+  .gov-right { background: var(--accent-light); border: 1px solid #b8d9c5; border-radius: 6px; padding: 12px 14px; font-size: 12px; color: var(--accent); }
+  .gov-match-label { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; opacity: 0.7; }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+  .kpi-card { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 16px; text-align: center; }
+  .kpi-val { font-size: 24px; font-weight: 700; color: var(--accent); font-family: 'Noto Serif JP', serif; }
+  .kpi-label { font-size: 11px; color: var(--ink-mute); margin-top: 4px; }
+  .kpi-sub { font-size: 10px; color: var(--ink-mute); margin-top: 2px; }
+
+  .rev-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .rev-table th { text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); padding: 8px 12px; border-bottom: 2px solid var(--border-strong); }
+  .rev-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .rev-table tr:last-child td { border-bottom: none; font-weight: 700; background: var(--accent-light); }
+  .rev-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .info-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .info-table th { text-align: left; padding: 8px 12px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); border-bottom: 1px solid var(--border-strong); }
+  .info-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .info-table .label-col { font-weight: 700; color: var(--ink); white-space: nowrap; }
+
+  .step-list { counter-reset: step; }
+  .step-item { counter-increment: step; display: grid; grid-template-columns: 36px 1fr; gap: 12px; margin-bottom: 20px; align-items: start; }
+  .step-num { width: 36px; height: 36px; background: var(--ink); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .step-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .step-body { font-size: 13px; color: var(--ink-sub); }
+
+  /* 安全カード */
+  .safety-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+  .safety-header { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+  .safety-icon { width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .safety-body { padding: 14px 18px; }
+  .safety-mechanism { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .mech-box { background: var(--paper-warm); border-radius: 6px; padding: 10px 12px; font-size: 12px; }
+  .mech-title { font-weight: 700; font-size: 11px; color: var(--ink); margin-bottom: 4px; }
+  .mech-body { font-size: 11px; color: var(--ink-sub); line-height: 1.6; }
+
+  .flow-row { display: flex; align-items: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+  .flow-box { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; font-size: 12px; color: var(--ink-sub); white-space: nowrap; }
+  .flow-box.trigger { background: var(--danger-light); border-color: #e0b0b0; color: var(--danger); font-weight: 700; }
+  .flow-box.output { background: var(--accent-light); border-color: #b8d9c5; color: var(--accent); font-weight: 700; }
+  .flow-arrow { font-size: 14px; color: var(--ink-mute); }
+
+  .quote-block { border-left: 3px solid var(--accent); padding: 12px 16px; background: var(--accent-light); border-radius: 0 6px 6px 0; font-size: 13px; color: var(--accent); margin: 12px 0; font-style: italic; }
+  .quote-source { font-style: normal; font-size: 11px; color: var(--ink-mute); margin-top: 4px; }
+  .alert { border-left: 3px solid var(--danger); padding: 12px 16px; background: var(--danger-light); border-radius: 0 6px 6px 0; font-size: 13px; color: var(--danger); margin: 12px 0; }
+  .info-box { border-left: 3px solid var(--blue); padding: 12px 16px; background: var(--blue-light); border-radius: 0 6px 6px 0; font-size: 13px; color: var(--blue); margin: 12px 0; }
+
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+  .mb16 { margin-bottom: 16px; }
+  .mb24 { margin-bottom: 24px; }
+  .mb32 { margin-bottom: 32px; }
+  .text-mute { color: var(--ink-mute); font-size: 12px; }
+
+  footer { background: var(--ink); color: rgba(255,255,255,0.5); text-align: center; padding: 32px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#vision">ビジョン</a><span class="sep">|</span>
+  <a href="#canvas">リーンキャンバス</a><span class="sep">|</span>
+  <a href="#safety">安全対策の設計</a><span class="sep">|</span>
+  <a href="#issues">課題マップ</a><span class="sep">|</span>
+  <a href="#gov">行政整合</a><span class="sep">|</span>
+  <a href="#roadmap">ロードマップ</a><span class="sep">|</span>
+  <a href="#revenue">収益試算</a><span class="sep">|</span>
+  <a href="#action">アクション</a>
+</nav>
+
+<div class="page-header">
+  <div class="header-kicker">新規事業提案 — 株式会社デジコンキューブ 社内ベンチャー</div>
+  <div class="header-title">山形インバウンド<br>安全・観光プラットフォーム</div>
+  <div class="header-vision">
+    山形に来た外国人を、観光から緊急時まで多言語で支える唯一のインフラになる。<br>
+    正義を貫きつつ、野心的に稼ぐ。
+  </div>
+  <div class="header-meta">
+    <div><div class="meta-label">起点エリア</div><div class="meta-val">蔵王・山形市</div></div>
+    <div><div class="meta-label">最初の相手</div><div class="meta-val">行政（山形県・山形市）</div></div>
+    <div><div class="meta-label">進め方</div><div class="meta-val">観光情報 → 安全情報へ拡張</div></div>
+    <div><div class="meta-label">実施体制</div><div class="meta-val">社内ベンチャー</div></div>
+    <div><div class="meta-label">計画期間</div><div class="meta-val">5年（令和7〜11年度）</div></div>
+  </div>
+</div>
+
+<!-- 01 ビジョン -->
+<section id="vision">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">ビジョンと背景</h2>
+  </div>
+
+  <div class="grid-2 mb32">
+    <div>
+      <div class="card-title" style="font-size:15px; margin-bottom:12px;">なぜ今、このビジネスか</div>
+      <p style="font-size:13px; color:var(--ink-sub); line-height:1.8; margin-bottom:10px;">山形県は2024年9月、観光庁の「高付加価値インバウンド観光地づくり事業」のモデル観光地に選定された。行政の熱量と予算が今まさに集中投下されている。</p>
+      <p style="font-size:13px; color:var(--ink-sub); line-height:1.8; margin-bottom:10px;">しかし、山形を訪れた外国人観光客が地震・火山噴火・豪雪などの緊急時に、母国語で情報を受け取る仕組みが存在しない。「来させる熱量」と「安全に帰す責任」が完全に乖離している。</p>
+      <p style="font-size:13px; color:var(--ink-sub); line-height:1.8;">この構造的な空白をデジコンキューブの自治体実績・開発力で埋める。観光情報から始め、安全情報へ拡張することで、行政が予算を出しやすい「インフラ」として育てる。</p>
+    </div>
+    <div>
+      <div class="quote-block">
+        「今後は拡大するインバウンド需要も見据え、感染症の大規模な流行や頻発する自然災害への対策を整理するなど、観光分野としての<strong>災害対応力の強化が必要</strong>になります。」
+        <div class="quote-source">— 第3次おもてなし山形県観光計画（令和7年3月策定）</div>
+      </div>
+      <div class="quote-block" style="margin-top:8px;">
+        「行政と民間の間や、民間同士でのデータ共有が進んでおらず、有効な施策や企画立案を行う際の<strong>機会損失が生じている</strong>可能性があります。」
+        <div class="quote-source">— 同計画</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kpi-grid mb24">
+    <div class="kpi-card">
+      <div class="kpi-val">7.5%</div>
+      <div class="kpi-label">山形・蔵王の外国人認知率</div>
+      <div class="kpi-sub">東京・京都は約60%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">25%</div>
+      <div class="kpi-label">認知者の訪問意欲転換率</div>
+      <div class="kpi-sub">北海道は64%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">0件</div>
+      <div class="kpi-label">多言語緊急対応プラットフォーム</div>
+      <div class="kpi-sub">山形県内の整備状況</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val">5年</div>
+      <div class="kpi-label">第3次観光計画の期間</div>
+      <div class="kpi-sub">令和7〜11年度（今まさに始動）</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>白馬との比較：</strong>白馬村は2005年から民間×行政が一体となって20年かけてインバウンド基盤を整備し、今や外国人宿泊者が過去20年最高を記録。山形はその「情報整備と認知拡大」フェーズをデジタルで短縮することができる。デジコンキューブはそのハブになれる唯一の地元IT企業。
+  </div>
+</section>
+
+<!-- 02 リーンキャンバス -->
+<section id="canvas">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">リーンキャンバス</h2>
+  </div>
+
+  <div class="lc-grid mb24">
+    <div class="lc-cell tall" style="grid-column:1; grid-row:1/3;">
+      <div class="lc-label">課題</div>
+      <div class="lc-content">
+        <strong>緊急時（最重要）</strong>
+        <ul>
+          <li>地震・噴火時に外国人への多言語情報伝達手段がない</li>
+          <li>蔵王は現役活火山。2015年噴火警戒時に外国人への多言語対応は機能しなかった</li>
+          <li>大使館・領事館への連絡手段が観光客に周知されていない</li>
+        </ul>
+        <br>
+        <strong>平常時</strong>
+        <ul>
+          <li>施設の開閉・休業情報がリアルタイムで取れない</li>
+          <li>AI・Google検索がネット未掲載情報を参照できない</li>
+          <li>施設側が英語以外の多言語対応を持っていない</li>
+        </ul>
+        <br>
+        <strong>構造的</strong>
+        <ul>
+          <li>「来させる責任」と「安全に帰す責任」の乖離</li>
+          <li>行政・民間間のデータ共有が進んでいない</li>
+        </ul>
+        <div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border);">
+          <div class="lc-label">既存代替手段の限界</div>
+          <ul>
+            <li>JNTOホットライン：認知率・到達率が低い</li>
+            <li>Safety tipsアプリ：DL率が低く観光客に届かない</li>
+            <li>観光案内所：時間外・言語スタッフ不在</li>
+            <li>Googleマップ：開閉情報の更新遅延</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc-cell" style="grid-column:2; grid-row:1;">
+      <div class="lc-label">解決策</div>
+      <div class="lc-content">
+        <strong>Phase 1：観光情報基盤</strong>
+        <ul>
+          <li>施設開閉をLINEボタン1つで更新</li>
+          <li>多言語Web（英・繁体・韓・仏）</li>
+          <li>Google・AI検索へ構造化データ連携</li>
+        </ul>
+        <br>
+        <strong>Phase 2：安全情報統合</strong>
+        <ul>
+          <li>地震・噴火・豪雪の多言語プッシュ通知</li>
+          <li>避難所・避難経路の多言語マップ</li>
+          <li>大使館・領事館へのワンタップ接続</li>
+          <li>医療機関・救急へのアクセス案内</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lc-cell tall" style="grid-column:3; grid-row:1/3;">
+      <div class="lc-label">独自の価値提案</div>
+      <div class="lc-content">
+        <p style="font-size:14px; font-weight:700; color:var(--ink); line-height:1.5; margin-bottom:12px;">「山形を安心して旅できる」を作る、唯一の多言語インフラ</p>
+        <ul>
+          <li><strong>観光客：</strong>言語の壁ゼロで安心して来られる</li>
+          <li><strong>施設側：</strong>更新負担ほぼゼロ・集客機会の損失ゼロ</li>
+          <li><strong>行政側：</strong>第3次計画の課題を具体的に解決できる</li>
+          <li><strong>地域住民：</strong>高品質・高マナーの外国人が来るようになる</li>
+        </ul>
+        <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:4px;">
+          <span class="tag tag-green">観光×安全の統合</span>
+          <span class="tag tag-blue">行政予算が取れる</span>
+          <span class="tag tag-amber">競合ほぼゼロ</span>
+          <span class="tag tag-gray">デジコン実績あり</span>
+        </div>
+        <div style="margin-top:16px; padding:12px; background:var(--paper-warm); border-radius:6px;">
+          <div style="font-size:11px; font-weight:700; color:var(--ink-mute); margin-bottom:4px;">スケールの天井</div>
+          <div style="font-size:12px; color:var(--ink-sub);">蔵王・山形市 → 山形県全域 → 東北全域 → 国の安全インフラ採用</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc-cell" style="grid-column:4; grid-row:1;">
+      <div class="lc-label">圧倒的優位性</div>
+      <div class="lc-content">
+        <ul>
+          <li>デジコンキューブの自治体実績・信頼</li>
+          <li>蔵王は活火山・東北は地震多発地帯という実需</li>
+          <li>山形特化の深さ（大手が入りにくい）</li>
+          <li>第3次計画の課題と完全一致</li>
+          <li>観光庁モデル観光地選定の追い風</li>
+          <li>山形大学・東北芸工大との接点</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lc-cell tall" style="grid-column:5; grid-row:1/3;">
+      <div class="lc-label">顧客セグメント</div>
+      <div class="lc-content">
+        <strong>一次顧客（支払い側）</strong>
+        <ul>
+          <li>山形県・山形市（安全インフラ委託契約）</li>
+          <li>観光施設・宿泊施設（月額掲載課金）</li>
+        </ul>
+        <br>
+        <strong>二次顧客（利用側）</strong>
+        <ul>
+          <li>台湾・香港の中国語圏観光客</li>
+          <li>欧米豪の英語圏観光客（増加中）</li>
+          <li>韓国・東南アジアからの訪問者</li>
+        </ul>
+        <div style="margin-top:8px; padding:8px; background:var(--danger-light); border-radius:4px; font-size:11px; color:var(--danger);">
+          <strong>対象外：中国本土</strong><br>マナー問題・地域摩擦リスク・住民生活への影響を考慮し、意図的に対象外とする
+        </div>
+        <br>
+        <strong>アーリーアダプター</strong>
+        <ul>
+          <li>イン・アウトバウンド推進課担当者</li>
+          <li>やまがたインバウンド協議会</li>
+          <li>蔵王温泉スキー場・立石寺周辺施設</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lc-cell" style="grid-column:2; grid-row:2;">
+      <div class="lc-label">チャネル</div>
+      <div class="lc-content">
+        <ul>
+          <li>多言語Web（英・繁体・韓・仏）</li>
+          <li>Google連携・JSON-LD構造化データ</li>
+          <li>AI検索（ChatGPT・Perplexity）参照</li>
+          <li>行政窓口・観光案内所でのQR配布</li>
+          <li>山形空港・仙台駅・蔵王スキー場での案内</li>
+          <li>台湾・香港向けOTA・旅行博（将来）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lc-cell" style="grid-column:4; grid-row:2;">
+      <div class="lc-label">主要指標</div>
+      <div class="lc-content">
+        <ul>
+          <li>行政実証実験：<strong>3ヶ月以内1件</strong></li>
+          <li>登録施設数：<strong>6ヶ月で20件</strong></li>
+          <li>施設課金継続率：<strong>月次追跡</strong></li>
+          <li>月間多言語アクセス：<strong>1,000UU</strong></li>
+          <li>緊急情報配信実績：<strong>発動回数・到達率</strong></li>
+          <li>外国人観光客満足度：<strong>Googleロコミ推移</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="lc-bottom">
+    <div class="lc-cell">
+      <div class="lc-label">コスト構造</div>
+      <div class="lc-content">
+        <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px;">
+          <span class="tag tag-red">サーバー 月2,000円</span>
+          <span class="tag tag-red">翻訳API 月2,000円〜</span>
+          <span class="tag tag-red">LINE公式 月3,000円</span>
+          <span class="tag tag-red">プッシュ通知 月1,000円〜</span>
+        </div>
+        開発はデジコン社内リソース活用。<strong>初期費用5万円以内。</strong><br>
+        Phase2（安全情報統合）は行政予算で賄う設計。
+      </div>
+    </div>
+    <div class="lc-cell">
+      <div class="lc-label">収益の流れ</div>
+      <div class="lc-content">
+        <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px;">
+          <span class="tag tag-blue">B2G 行政委託 数十〜百万/案件</span>
+          <span class="tag tag-green">B2B 施設月額 ¥3,000〜1万</span>
+          <span class="tag tag-amber">将来：OTA手数料・観光データ販売</span>
+        </div>
+        <strong>月5万の達成ライン：</strong>施設20件課金 or 行政案件1件<br>
+        <strong>天井：</strong>東北全域モデル → 国の観光安全インフラ採用
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 安全対策の設計 -->
+<section id="safety">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">安全対策の具体設計</h2>
+  </div>
+
+  <p style="font-size:13px; color:var(--ink-sub); line-height:1.8; margin-bottom:24px;">
+    山形の自然リスクは「地震・火山・豪雪・熊出没・熱中症」の5種類。それぞれに対応方法が異なり、情報の種類・伝達手段・タイミングが変わる。平常時の観光情報プラットフォームが緊急時のインフラに転換できるよう、最初から設計に組み込む。
+  </p>
+
+  <!-- 地震 -->
+  <div class="safety-card mb24">
+    <div class="safety-header">
+      <div class="safety-icon" style="background:#fdf0f0; color:#8b2020;">⚡</div>
+      <div>
+        <div style="font-weight:700; font-size:14px;">地震発生時</div>
+        <div style="font-size:12px; color:var(--ink-mute);">東北は地震多発地帯。2024年も能登・山形周辺で複数発生</div>
+      </div>
+      <div style="margin-left:auto;"><span class="tag tag-red">最重要</span></div>
+    </div>
+    <div class="safety-body">
+      <div class="flow-row">
+        <div class="flow-box trigger">地震発生（気象庁API）</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">震度・震源地を自動取得</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">震度3以上で自動発動</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box output">5言語でプッシュ通知</div>
+      </div>
+      <div class="safety-mechanism">
+        <div class="mech-box">
+          <div class="mech-title">通知内容</div>
+          <div class="mech-body">震度・震源地・津波の有無・今すぐとるべき行動（机の下に隠れる等）を5言語で</div>
+        </div>
+        <div class="mech-box">
+          <div class="mech-title">避難誘導</div>
+          <div class="mech-body">現在地から最寄り避難所へのルートを多言語マップで表示。避難所の収容状況もリアルタイム連携（行政との連携が必要）</div>
+        </div>
+        <div class="mech-box">
+          <div class="mech-title">大使館連携</div>
+          <div class="mech-body">台湾・韓国・米国・英国・仏国の大使館・領事館へのワンタップ電話。各国語の緊急連絡先一覧を常時表示</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:var(--ink-mute);">技術：気象庁のリアルタイム地震情報API（無償）+ WebPush通知 + Google Maps APIで避難所表示</div>
+    </div>
+  </div>
+
+  <!-- 火山 -->
+  <div class="safety-card mb24">
+    <div class="safety-header">
+      <div class="safety-icon" style="background:#fdf6e3; color:#7a5200;">🌋</div>
+      <div>
+        <div style="font-weight:700; font-size:14px;">蔵王火山噴火警戒</div>
+        <div style="font-size:12px; color:var(--ink-mute);">2015年に噴火警戒レベル2に引き上げ。スキーシーズン中の外国人対応が最大課題</div>
+      </div>
+      <div style="margin-left:auto;"><span class="tag tag-red">最重要</span></div>
+    </div>
+    <div class="safety-body">
+      <div class="flow-row">
+        <div class="flow-box trigger">警戒レベル変更（気象庁）</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">レベル1→2の変更で即発動</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">立入禁止エリアを地図で表示</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box output">5言語で一斉通知</div>
+      </div>
+      <div class="safety-mechanism">
+        <div class="mech-box">
+          <div class="mech-title">リアルタイム表示</div>
+          <div class="mech-body">警戒レベルと立入禁止エリアを観光情報ページのトップに常時バナー表示。レベルに応じて色が変わる</div>
+        </div>
+        <div class="mech-box">
+          <div class="mech-title">スキー場連携</div>
+          <div class="mech-body">蔵王温泉スキー場の公式情報と連動。コース閉鎖・営業停止情報を多言語でリアルタイム配信</div>
+        </div>
+        <div class="mech-box">
+          <div class="mech-title">避難ルート</div>
+          <div class="mech-body">山頂・ロープウェイ・各スキー場からの下山ルートを多言語マップで表示。ロープウェイ停止時の代替経路も</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:var(--ink-mute);">技術：気象庁噴火警報API + 蔵王温泉スキー場との情報連携協定（要交渉）</div>
+    </div>
+  </div>
+
+  <!-- 豪雪 -->
+  <div class="safety-card mb24">
+    <div class="safety-header">
+      <div class="safety-icon" style="background:#eef4fb; color:#1a3a5c;">❄</div>
+      <div>
+        <div style="font-weight:700; font-size:14px;">豪雪・道路閉鎖</div>
+        <div style="font-size:12px; color:var(--ink-mute);">山形の冬は世界的に見ても積雪量が多い。レンタカー観光客が孤立するリスクがある</div>
+      </div>
+      <div style="margin-left:auto;"><span class="tag tag-amber">重要</span></div>
+    </div>
+    <div class="safety-body">
+      <div class="safety-mechanism">
+        <div class="mech-box">
+          <div class="mech-title">道路閉鎖情報</div>
+          <div class="mech-body">山形県の道路情報（国道・県道）の通行止め・チェーン規制を多言語でリアルタイム表示。蔵王エコーライン等の冬季閉鎖は事前告知</div>
+        </div>
+        <div class="mech-box">
+          <div class="mech-title">吹雪・視界不良</div>
+          <div class="mech-body">気象警報発令時に「運転注意」「外出控え」を多言語でプッシュ通知。安全に待機できる施設（道の駅等）を地図表示</div>
+        </div>
+        <div class="mech-box">
+          <div class="mech-title">除雪・スタック対応</div>
+          <div class="mech-body">車がスタックした際の緊急連絡先（JAF等）を多言語で案内。レンタカー会社の緊急連絡先と連携</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:var(--ink-mute);">技術：国土交通省道路情報API + 気象庁API + Google Maps</div>
+    </div>
+  </div>
+
+  <!-- 熊・野生動物 -->
+  <div class="safety-card mb24">
+    <div class="safety-header">
+      <div class="safety-icon" style="background:#f0ede4; color:#4a4a44;">🐻</div>
+      <div>
+        <div style="font-weight:700; font-size:14px;">クマ出没・野生動物</div>
+        <div style="font-size:12px; color:var(--ink-mute);">山形は全国有数のクマ生息地。外国人観光客は「クマがいる」認識自体がない場合が多い</div>
+      </div>
+      <div style="margin-left:auto;"><span class="tag tag-amber">重要</span></div>
+    </div>
+    <div class="safety-body">
+      <div class="safety-mechanism">
+        <div class="mech-box">
+          <div class="mech-title">出没情報マップ</div>
+          <div class="mech-body">山形県が公開するクマ出没情報を多言語マップで表示。出没エリア付近の観光スポットには自動で警告バナーを付与</div>
+        </div>
+        <div class="mech-box">
+          <div class="mech-title">行動ガイド</div>
+          <div class="mech-body">「クマに遭遇した場合の対処法」を多言語で平常時から掲載。音を出す・目を合わせない等、日本固有の対処法を文化的に理解できる形で説明</div>
+        </div>
+        <div class="mech-box">
+          <div class="mech-title">ハイキング前チェック</div>
+          <div class="mech-body">立石寺・月山・出羽三山等のトレッキングコース出発前に、クマ情報・携行品・緊急連絡先を確認できるチェックリストを多言語で</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 医療 -->
+  <div class="safety-card mb24">
+    <div class="safety-header">
+      <div class="safety-icon" style="background:#e8f4ed; color:#1a5c3a;">🏥</div>
+      <div>
+        <div style="font-weight:700; font-size:14px;">医療・救急アクセス</div>
+        <div style="font-size:12px; color:var(--ink-mute);">外国人が日本で救急を呼ぶ方法・保険対応病院を知らないケースが多い</div>
+      </div>
+      <div style="margin-left:auto;"><span class="tag tag-blue">必須</span></div>
+    </div>
+    <div class="safety-body">
+      <div class="safety-mechanism">
+        <div class="mech-box">
+          <div class="mech-title">救急・警察の呼び方</div>
+          <div class="mech-body">119番・110番の使い方を多言語で説明。英語で話せない場合の「三者通話通訳」サービスへの接続方法も掲載</div>
+        </div>
+        <div class="mech-box">
+          <div class="mech-title">外国語対応医療機関</div>
+          <div class="mech-body">山形県内の英語・中国語・韓国語対応医療機関を地図で表示。営業時間・対応言語・海外保険対応の可否を明記</div>
+        </div>
+        <div class="mech-box">
+          <div class="mech-title">保険・支払い案内</div>
+          <div class="mech-body">旅行保険の使い方・キャッシュレス診療の可否・領収書の取り方を多言語で説明。支払いトラブルの予防情報も</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:var(--ink-mute);">参考：観光庁「外国人患者受入れのための医療機関整備」事業との連携を検討</div>
+    </div>
+  </div>
+
+  <!-- 情報発信の多層構造 -->
+  <div class="card">
+    <div class="card-title" style="font-size:15px; margin-bottom:16px;">情報発信の多層構造（平常時→緊急時の切替）</div>
+    <table class="info-table">
+      <tr>
+        <th>レイヤー</th>
+        <th>手段</th>
+        <th>平常時</th>
+        <th>緊急時</th>
+        <th>到達対象</th>
+      </tr>
+      <tr>
+        <td class="label-col">プッシュ通知</td>
+        <td>WebPush・LINE</td>
+        <td>施設開閉・新着情報</td>
+        <td>地震・噴火・豪雪アラート（自動）</td>
+        <td>アプリ登録済み観光客</td>
+      </tr>
+      <tr>
+        <td class="label-col">Webページ</td>
+        <td>多言語サイト</td>
+        <td>スポット情報・体験案内</td>
+        <td>トップバナーで緊急情報・避難誘導</td>
+        <td>サイト訪問者全員</td>
+      </tr>
+      <tr>
+        <td class="label-col">QRコード</td>
+        <td>施設・案内板設置</td>
+        <td>観光情報へのアクセス</td>
+        <td>同URL→自動で緊急情報に切替</td>
+        <td>現地にいる人全員</td>
+      </tr>
+      <tr>
+        <td class="label-col">Google連携</td>
+        <td>構造化データ</td>
+        <td>営業時間・施設情報</td>
+        <td>臨時休業・立入禁止を自動反映</td>
+        <td>検索ユーザー全員</td>
+      </tr>
+      <tr>
+        <td class="label-col">AI検索連携</td>
+        <td>JSON-LD</td>
+        <td>施設の詳細情報</td>
+        <td>緊急情報をAIが参照・回答</td>
+        <td>ChatGPT等利用者</td>
+      </tr>
+      <tr>
+        <td class="label-col">デジタルサイネージ</td>
+        <td>スキー場・施設内</td>
+        <td>天気・営業情報</td>
+        <td>避難指示・誘導（将来実装）</td>
+        <td>施設内の全員</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- 04 課題マップ -->
+<section id="issues">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">課題の全体マップ</h2>
+  </div>
+
+  <div class="mb24">
+    <div class="issue-row header">
+      <div>分類</div><div>課題内容</div><div>優先度</div><div>解決アプローチ</div>
+    </div>
+    <div class="issue-row">
+      <div><span class="tag tag-red">収益化</span></div>
+      <div><strong>鶏と卵問題</strong>：全員が「先に価値を見せろ」と言う</div>
+      <div><span class="tag tag-red">致命的</span></div>
+      <div>行政との無償実証から入り、実績を作ってから課金へ</div>
+    </div>
+    <div class="issue-row">
+      <div><span class="tag tag-red">収益化</span></div>
+      <div><strong>施設課金の根拠</strong>：観光客が来た実感がないと解約される</div>
+      <div><span class="tag tag-red">致命的</span></div>
+      <div>閲覧数・問い合わせ数・QRスキャン数を可視化したダッシュボードを施設に提供</div>
+    </div>
+    <div class="issue-row">
+      <div><span class="tag tag-amber">オペレーション</span></div>
+      <div><strong>情報更新の停止</strong>：繁忙期に施設が更新をやめる</div>
+      <div><span class="tag tag-amber">高</span></div>
+      <div>LINEの毎朝自動リマインド。未更新は「情報なし」と表示し観光客に正直に伝える</div>
+    </div>
+    <div class="issue-row">
+      <div><span class="tag tag-amber">法的</span></div>
+      <div><strong>通訳案内士法</strong>：無資格ガイドの品質・法的グレーゾーン（2018年改正で業務独占は撤廃済みだが品質担保が課題）</div>
+      <div><span class="tag tag-amber">高</span></div>
+      <div>「ローカルホスト体験」としてAirbnb体験モデルで設計。通訳ではなく「地元民と体験をシェア」として法的リスクを回避</div>
+    </div>
+    <div class="issue-row">
+      <div><span class="tag tag-amber">翻訳品質</span></div>
+      <div><strong>自動翻訳の精度</strong>：DeepL等は固有名詞・文化的ニュアンスで誤訳が出る。緊急情報の誤訳は命に関わる</div>
+      <div><span class="tag tag-amber">高</span></div>
+      <div>緊急情報テンプレートは事前にネイティブが監修した固定文言を使用。観光情報はAI翻訳+ネイティブチェックの組み合わせ</div>
+    </div>
+    <div class="issue-row">
+      <div><span class="tag tag-blue">差別化</span></div>
+      <div><strong>Google参入リスク</strong>：開閉情報という機能だけでは3ヶ月で代替される</div>
+      <div><span class="tag tag-blue">中</span></div>
+      <div>安全情報との統合・行政契約・地元ネットワークという「人と関係性」を差別化の核にする</div>
+    </div>
+    <div class="issue-row">
+      <div><span class="tag tag-blue">季節性</span></div>
+      <div><strong>冬季6割集中</strong>：オフシーズンの収益が薄く事業が不安定</div>
+      <div><span class="tag tag-blue">中</span></div>
+      <div>立石寺（通年）・さくらんぼ農業体験（夏）・月山スキー（春）など四季コンテンツを段階的に拡充</div>
+    </div>
+    <div class="issue-row">
+      <div><span class="tag tag-blue">スケール</span></div>
+      <div><strong>引き継ぎ人材不足</strong>：デジコン社内がカツカツで担当者が確保できない</div>
+      <div><span class="tag tag-blue">中</span></div>
+      <div>Phase1でオペレーションを自動化→3ヶ月目に担当者アサイン交渉。山形大学・東北芸工大の学生インターン活用も検討</div>
+    </div>
+    <div class="issue-row">
+      <div><span class="tag tag-gray">外部</span></div>
+      <div><strong>行政の意思決定の遅さ</strong>：担当者交代で白紙になるリスク・予算化まで半年〜1年</div>
+      <div><span class="tag tag-gray">低</span></div>
+      <div>B2B施設課金を先行させ、行政はあくまで加速装置として位置づける。行政依存にしない</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 行政整合 -->
+<section id="gov">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">行政課題との整合マッピング</h2>
+  </div>
+
+  <p class="text-mute mb24">第3次おもてなし山形県観光計画（令和7年3月策定・令和7〜11年度）の課題記述と本事業の対応関係</p>
+
+  <div class="mb32">
+    <div class="gov-match">
+      <div class="gov-left"><div class="gov-match-label">計画書の課題（原文）</div>観光分野としての<strong>災害対応力の強化</strong>が必要になります</div>
+      <div class="gov-arrow">→</div>
+      <div class="gov-right"><div class="gov-match-label">本事業の解決策</div>地震・噴火・豪雪時の<strong>5言語多言語緊急情報配信</strong>プラットフォーム</div>
+    </div>
+    <div class="gov-match">
+      <div class="gov-left"><div class="gov-match-label">計画書の課題（原文）</div>外国人旅行者の多様なニーズに対応できる<strong>プロガイドの発掘・育成</strong>が必要</div>
+      <div class="gov-arrow">→</div>
+      <div class="gov-right"><div class="gov-match-label">本事業の解決策</div><strong>ローカルホストマッチング</strong>による多言語体験ガイドの供給・育成基盤</div>
+    </div>
+    <div class="gov-match">
+      <div class="gov-left"><div class="gov-match-label">計画書の課題（原文）</div>行政と民間の間の<strong>データ共有が進んでおらず機会損失</strong>が生じている</div>
+      <div class="gov-arrow">→</div>
+      <div class="gov-right"><div class="gov-match-label">本事業の解決策</div>施設情報・観光行動データを<strong>一元管理・可視化</strong>するDXプラットフォーム</div>
+    </div>
+    <div class="gov-match">
+      <div class="gov-left"><div class="gov-match-label">計画書の課題（原文）</div>インバウンドが蔵王・銀山など<strong>一部エリアに集中</strong>する傾向</div>
+      <div class="gov-arrow">→</div>
+      <div class="gov-right"><div class="gov-match-label">本事業の解決策</div>多スポット情報を多言語発信し<strong>県内全域への周遊を促進</strong></div>
+    </div>
+    <div class="gov-match">
+      <div class="gov-left"><div class="gov-match-label">計画書の課題（原文）</div>自治体職員・観光関係者の<strong>デジタルリテラシーの向上</strong>が課題</div>
+      <div class="gov-arrow">→</div>
+      <div class="gov-right"><div class="gov-match-label">本事業の解決策</div>施設が使える<strong>シンプルなDXツール</strong>を提供し、現場からDXを定着させる</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="mb32">
+    <div class="card-title" style="font-size:15px; margin-bottom:16px;">活用できる補助金・事業</div>
+    <table class="info-table">
+      <tr>
+        <th style="width:220px;">補助金・事業名</th>
+        <th>内容</th>
+        <th style="width:100px;">整合性</th>
+      </tr>
+      <tr>
+        <td class="label-col">高付加価値インバウンド観光地づくり事業（観光庁）</td>
+        <td>山形県がモデル観光地に選定済み（2024年9月）。複数年の集中支援。マスタープランに基づく事業が対象</td>
+        <td><span class="tag tag-green">◎ 直結</span></td>
+      </tr>
+      <tr>
+        <td class="label-col">インバウンド安全・安心対策推進事業（観光庁）</td>
+        <td>訪日外国人への多言語避難誘導・災害時情報伝達・医療機関受入機能強化を支援</td>
+        <td><span class="tag tag-green">◎ 直結</span></td>
+      </tr>
+      <tr>
+        <td class="label-col">インバウンド受入環境整備高度化事業（観光庁）</td>
+        <td>多言語案内整備・無料Wi-Fi・キャッシュレス対応等。市区町村・民間事業者が対象</td>
+        <td><span class="tag tag-blue">○ 関連</span></td>
+      </tr>
+      <tr>
+        <td class="label-col">地域観光資源の多言語解説整備支援事業（観光庁）</td>
+        <td>観光スポットの多言語解説文作成を観光庁が専門家を派遣して直接支援</td>
+        <td><span class="tag tag-blue">○ 関連</span></td>
+      </tr>
+      <tr>
+        <td class="label-col">山形県インバウンド受入環境整備補助金</td>
+        <td>県内民間事業者の多言語対応・Wi-Fi整備等を支援。上限100万円/施設</td>
+        <td><span class="tag tag-blue">○ 施設向け</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="alert mb24">
+    <strong>申請期間について：</strong>今年度の補助金申請は締め切り済み。戦略は「補助金申請待ち」ではなく、<strong>来年度予算の企画段階に今から入り込むこと</strong>。第3次計画が令和7年3月に策定されたばかりで、担当者が「何から手をつけるか」を模索している今が最適なタイミング。
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--accent);">
+    <div class="card-title" style="font-size:15px; margin-bottom:16px;">行政への接触戦略（3ステップ）</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">窓口接触（今月中）</div>
+          <div class="step-body">山形県「イン・アウトバウンド推進課」へデジコンキューブ名義で連絡。「第3次計画の災害対応力強化とDX推進について、民間側から提案があります」という切り口で打診。計画書を読んでいる民間事業者として認識させることが重要。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">無償実証の提案（1〜2ヶ月）</div>
+          <div class="step-body">「補助金申請ではなく、蔵王エリアで無償の小規模実証実験をやらせてください」と持ちかける。行政はリスクゼロで実績が作れるこの提案を断りにくい。実証の目的は「外国人観光客に多言語の安全情報が届くかどうかの検証」と設定する。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">来年度予算への組み込み（3〜6ヶ月）</div>
+          <div class="step-body">実証データを持って「来年度の事業化に向けた予算要求に組み込んでください」と交渉する。「N件の施設が登録し、外国人N人がアクセスし、緊急時にN人に情報が届いた」という数字が説得材料になる。</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px; padding:14px 16px; background:var(--paper-warm); border-radius:6px;">
+      <div style="font-size:11px; font-weight:700; color:var(--ink-mute); margin-bottom:6px;">担当者への一言トーク</div>
+      <div style="font-size:14px; color:var(--ink); line-height:1.8; font-style:italic;">「第3次おもてなし山形県観光計画で課題として明示された『観光分野の災害対応力強化』と『インバウンドDX』を、蔵王エリアで小規模実証できるプロトタイプを持っています。まずお話を聞いていただけませんか。」</div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 ロードマップ -->
+<section id="roadmap">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2 class="section-title">5年ロードマップ</h2>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot active"></div>
+      <div class="tl-phase">Phase 0 — 0〜6ヶ月 ★現在地</div>
+      <div class="tl-title">土を作る：行政との関係構築・最初の実証</div>
+      <div class="tl-body">第3次計画を読み込み、行政の課題を自分の言葉で話せる状態にする。プロトタイプを持って行政に提案。無償で蔵王エリア5施設の実証実験を開始。「施設が本当に更新し続けるか」「外国人に実際に届くか」の2点を検証するのが最重要ゴール。</div>
+      <div class="tl-actions">
+        <span class="action-chip">デジコン代表へ社内ベンチャー提案</span>
+        <span class="action-chip">イン・アウトバウンド推進課にアポ</span>
+        <span class="action-chip">蔵王エリア施設3〜5件ヒアリング</span>
+        <span class="action-chip">Notionで多言語MVPページ公開</span>
+        <span class="action-chip">気象庁API連携の技術検証</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Phase 1 — 6ヶ月〜1.5年</div>
+      <div class="tl-title">芽を出す：MVP稼働・観光情報の収益化</div>
+      <div class="tl-body">LINEボット実装・DeepL連携で観光情報の多言語自動化。施設月額課金開始（閲覧数・QRスキャン数を可視化して提示）。行政との実証実験を正式化。社内担当者アサインの準備を開始。</div>
+      <div class="tl-actions">
+        <span class="action-chip">LINEボット開発（社内）</span>
+        <span class="action-chip">Google構造化データ連携</span>
+        <span class="action-chip">施設課金開始（月3,000〜）</span>
+        <span class="action-chip">行政実証実験の正式合意</span>
+        <span class="action-chip">月収益3万円達成</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Phase 2 — 1.5〜3年</div>
+      <div class="tl-title">幹を育てる：安全情報統合・社内体制移管・研究復帰</div>
+      <div class="tl-body">観光情報に緊急・安全情報を統合し「山形インバウンド安全プラットフォーム」として再定義。行政委託契約による安定収益化。デジコン社内に担当者をアサインし、自分は月4時間の監修に移行→研究復帰。</div>
+      <div class="tl-actions">
+        <span class="action-chip">多言語緊急アラート機能実装</span>
+        <span class="action-chip">蔵王火山情報・クマ出没情報連携</span>
+        <span class="action-chip">行政委託契約締結</span>
+        <span class="action-chip">社内担当者アサイン</span>
+        <span class="action-chip">月収益5万円安定化</span>
+        <span class="action-chip">研究復帰</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Phase 3 — 3〜4年</div>
+      <div class="tl-title">枝を広げる：山形県全域・高付加価値コンテンツ化</div>
+      <div class="tl-body">銀山温泉・出羽三山・米沢・庄内へエリア拡張。Trip.com・KlookなどOTAへの体験コンテンツ出品。台湾・香港の旅行博への出展（白馬が2005年にオーストラリアでやったことを中国語圏でやる）。デジタルサイネージとの連携。</div>
+      <div class="tl-actions">
+        <span class="action-chip">山形県全域展開</span>
+        <span class="action-chip">OTA出品（Trip.com・Klook）</span>
+        <span class="action-chip">台湾旅行博出展</span>
+        <span class="action-chip">デジタルサイネージ連携</span>
+        <span class="action-chip">月収益20万+</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Phase 4 — 4〜5年</div>
+      <div class="tl-title">実をつける：東北全域モデル・インフラ化</div>
+      <div class="tl-body">秋田・岩手・福島への横展開。山形で実証したモデルを東北全域に広げ、国の観光安全インフラ採用を狙う。観光行動データのB2B販売（旅行会社・行政・研究機関向け）。スケールアップ投資 or 売却の判断。</div>
+      <div class="tl-actions">
+        <span class="action-chip">東北全域展開</span>
+        <span class="action-chip">観光データのB2B販売</span>
+        <span class="action-chip">国の安全インフラ採用狙い</span>
+        <span class="action-chip">月収益50万+</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 収益試算 -->
+<section id="revenue">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2 class="section-title">収益シミュレーション</h2>
+  </div>
+
+  <div class="grid-2 mb32">
+    <div>
+      <div class="card-title" style="font-size:15px; margin-bottom:16px;">Phase別収益目標</div>
+      <table class="rev-table">
+        <tr>
+          <th>フェーズ</th><th>施設課金</th><th>行政委託</th><th class="num">月収益目標</th>
+        </tr>
+        <tr>
+          <td>Phase 0<br><span style="font-size:11px;color:var(--ink-mute)">0〜6ヶ月</span></td>
+          <td>0円（無償実証）</td><td>0円</td><td class="num">¥0</td>
+        </tr>
+        <tr>
+          <td>Phase 1<br><span style="font-size:11px;color:var(--ink-mute)">6〜18ヶ月</span></td>
+          <td>10施設×3,000円</td><td>実証費用（単発）</td><td class="num">¥3万〜</td>
+        </tr>
+        <tr>
+          <td>Phase 2<br><span style="font-size:11px;color:var(--ink-mute)">18〜36ヶ月</span></td>
+          <td>20施設×5,000円</td><td>委託契約開始</td><td class="num">¥5万〜</td>
+        </tr>
+        <tr>
+          <td>Phase 3<br><span style="font-size:11px;color:var(--ink-mute)">3〜4年</span></td>
+          <td>50施設×6,000円</td><td>継続委託+OTA手数料</td><td class="num">¥20万〜</td>
+        </tr>
+        <tr>
+          <td>Phase 4<br><span style="font-size:11px;color:var(--ink-mute)">4〜5年</span></td>
+          <td>300施設×6,000円</td><td>東北全域委託+データ販売</td><td class="num">¥50万〜</td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <div class="card-title" style="font-size:15px; margin-bottom:16px;">月額コスト内訳</div>
+      <table class="rev-table">
+        <tr><th>項目</th><th class="num">月額</th></tr>
+        <tr><td>サーバー（VPS）</td><td class="num">¥2,000</td></tr>
+        <tr><td>翻訳API（DeepL Pro）</td><td class="num">¥2,000〜</td></tr>
+        <tr><td>LINE公式アカウント</td><td class="num">¥3,000</td></tr>
+        <tr><td>WebPushサービス</td><td class="num">¥1,000〜</td></tr>
+        <tr><td>地図API（Google Maps）</td><td class="num">¥0〜3,000</td></tr>
+        <tr><td>開発（社内リソース）</td><td class="num">¥0</td></tr>
+        <tr><td><strong>合計</strong></td><td class="num"><strong>¥8,000〜11,000</strong></td></tr>
+      </table>
+      <div style="margin-top:12px; padding:10px 12px; background:var(--accent-light); border-radius:6px; font-size:12px; color:var(--accent);">
+        初期費用：<strong>¥5万円以内</strong>（ドメイン・初期開発・備品等）
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="font-size:15px; margin-bottom:12px;">収益の多角化ロードマップ</div>
+    <div class="card-body">
+      <table class="info-table">
+        <tr><th>収益軸</th><th>内容</th><th>単価感</th><th>開始時期</th></tr>
+        <tr><td class="label-col">施設月額課金（B2B）</td><td>掲載・開閉管理・閲覧数レポート</td><td>¥3,000〜1万/施設・月</td><td>Phase 1〜</td></tr>
+        <tr><td class="label-col">行政委託（B2G）</td><td>安全情報配信・多言語観光DX実証</td><td>数十〜百万/案件</td><td>Phase 2〜</td></tr>
+        <tr><td class="label-col">OTA手数料</td><td>体験コンテンツの予約仲介手数料</td><td>15〜20%/件</td><td>Phase 3〜</td></tr>
+        <tr><td class="label-col">多言語Web制作（デジコン連携）</td><td>施設向け多言語サイト制作・更新</td><td>30〜50万/件</td><td>Phase 1〜（先行収益）</td></tr>
+        <tr><td class="label-col">観光データ販売（B2B）</td><td>施設別アクセス・行動データ分析</td><td>10〜50万/年・社</td><td>Phase 4〜</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 08 次のアクション -->
+<section id="action">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <h2 class="section-title">次のアクション</h2>
+  </div>
+
+  <div class="grid-3 mb32">
+    <div class="card" style="border-top:3px solid var(--accent);">
+      <div class="card-title">今週中にやること</div>
+      <div class="card-body">
+        <ul style="list-style:none; padding:0;">
+          <li style="padding:8px 0; border-bottom:1px solid var(--border); font-size:13px;">① 代表に社内ベンチャー提案を切り出す</li>
+          <li style="padding:8px 0; border-bottom:1px solid var(--border); font-size:13px;">② 山形県イン・アウトバウンド推進課の担当者名を調べる</li>
+          <li style="padding:8px 0; font-size:13px;">③ 気象庁地震情報APIの仕様を確認する（無償）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--amber);">
+      <div class="card-title">今月中にやること</div>
+      <div class="card-body">
+        <ul style="list-style:none; padding:0;">
+          <li style="padding:8px 0; border-bottom:1px solid var(--border); font-size:13px;">① 行政（イン・アウトバウンド推進課）にアポを取る</li>
+          <li style="padding:8px 0; border-bottom:1px solid var(--border); font-size:13px;">② 蔵王エリア施設3件に「情報更新協力」を口頭打診</li>
+          <li style="padding:8px 0; font-size:13px;">③ NotionでMVP多言語ページを公開（英語・繁体字）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--blue);">
+      <div class="card-title">3ヶ月以内にやること</div>
+      <div class="card-body">
+        <ul style="list-style:none; padding:0;">
+          <li style="padding:8px 0; border-bottom:1px solid var(--border); font-size:13px;">① 行政との実証実験を合意に持ち込む</li>
+          <li style="padding:8px 0; border-bottom:1px solid var(--border); font-size:13px;">② 施設5件の更新継続を確認（週次で追う）</li>
+          <li style="padding:8px 0; font-size:13px;">③ LINEボット最小実装をデジコン社内で開発開始</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:var(--ink); border-color:var(--ink);">
+    <div class="card-title" style="color:#fff; font-size:15px; margin-bottom:12px;">社内ベンチャー提案のポイント3点</div>
+    <div class="grid-3" style="gap:12px; margin-top:4px;">
+      <div style="background:rgba(255,255,255,0.08); border-radius:6px; padding:14px;">
+        <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.5); margin-bottom:6px; letter-spacing:0.06em;">POINT 1</div>
+        <div style="font-size:13px; color:#fff; line-height:1.7;">行政が今年3月に策定した計画書に、この事業の必要性が<strong style="color:#a8d5b8;">そのまま書いてある</strong></div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08); border-radius:6px; padding:14px;">
+        <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.5); margin-bottom:6px; letter-spacing:0.06em;">POINT 2</div>
+        <div style="font-size:13px; color:#fff; line-height:1.7;">初期費用5万円・社内リソースで開始できる。<strong style="color:#a8d5b8;">会社のリスクはほぼゼロ</strong></div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08); border-radius:6px; padding:14px;">
+        <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.5); margin-bottom:6px; letter-spacing:0.06em;">POINT 3</div>
+        <div style="font-size:13px; color:#fff; line-height:1.7;">山形から東北全域へのスケールが狙える。<strong style="color:#a8d5b8;">デジコンの地元貢献と事業成長が一致する</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  山形インバウンド安全・観光プラットフォーム 事業設計書 v2.1<br>
+  第3次おもてなし山形県観光計画（令和7年3月）/ やまがたインバウンド協議会マスタープラン（令和6年度）準拠<br>
+  株式会社デジコンキューブ 社内ベンチャー提案
+</footer>
+
+</body>
+</html>
