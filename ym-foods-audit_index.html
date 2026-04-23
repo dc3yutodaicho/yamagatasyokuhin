@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山形食品 サイト課題レポート</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;600&display=swap');
+
+  :root {
+    --red: #C0392B;
+    --dark: #1A1A1A;
+    --mid: #3D3D3D;
+    --light: #F5F2EE;
+    --accent: #E8D5C0;
+    --border: #D0C8BC;
+    --green: #27AE60;
+    --orange: #E67E22;
+    --blue: #2980B9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    color: #fff;
+    padding: 48px 60px 40px;
+    border-bottom: 4px solid var(--red);
+  }
+  header .label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 12px;
+  }
+  header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  header h1 span {
+    color: var(--red);
+  }
+  header .meta {
+    margin-top: 20px;
+    display: flex;
+    gap: 32px;
+    font-size: 13px;
+    color: #aaa;
+  }
+  header .meta strong {
+    color: #fff;
+  }
+
+  /* SUMMARY BAR */
+  .summary-bar {
+    background: var(--dark);
+    border-top: 1px solid #333;
+    padding: 20px 60px;
+    display: flex;
+    gap: 48px;
+  }
+  .summary-stat {
+    text-align: center;
+  }
+  .summary-stat .num {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .summary-stat .num.critical { color: var(--red); }
+  .summary-stat .num.warning { color: var(--orange); }
+  .summary-stat .num.info { color: var(--blue); }
+  .summary-stat .label-s {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 56px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-num {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #999;
+  }
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  /* ISSUE CARD */
+  .issue-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .issue-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--border);
+    padding: 24px 24px 20px;
+    border-radius: 2px;
+    transition: box-shadow 0.2s;
+  }
+  .issue-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .issue-card.critical { border-left-color: var(--red); }
+  .issue-card.warning  { border-left-color: var(--orange); }
+  .issue-card.info     { border-left-color: var(--blue); }
+
+  .issue-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .badge.critical { background: #FDEDEC; color: var(--red); }
+  .badge.warning  { background: #FEF5E7; color: var(--orange); }
+  .badge.info     { background: #EBF5FB; color: var(--blue); }
+
+  .issue-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .issue-body {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .issue-suggest {
+    font-size: 12px;
+    color: #666;
+    background: var(--light);
+    padding: 10px 14px;
+    border-radius: 2px;
+    border-left: 3px solid var(--accent);
+  }
+  .issue-suggest::before {
+    content: '💡 改善案：';
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  /* FULL WIDTH CARD */
+  .issue-card.full {
+    grid-column: 1 / -1;
+  }
+
+  /* PRIORITY TABLE */
+  .priority-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: #fff;
+    border: 1px solid var(--border);
+  }
+  .priority-table th {
+    background: var(--dark);
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  .priority-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .priority-table tr:last-child td { border-bottom: none; }
+  .priority-table tr:nth-child(even) td { background: #FAFAF8; }
+  .tag { 
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 11px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .tag.high { background: #FDEDEC; color: var(--red); }
+  .tag.mid  { background: #FEF5E7; color: var(--orange); }
+  .tag.low  { background: #EBF5FB; color: var(--blue); }
+  .tag.quick { background: #E8F8F5; color: var(--green); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: #666;
+    text-align: center;
+    padding: 28px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    border-top: 2px solid #333;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">Website Audit Report</div>
+  <h1>山形食品株式会社<br><span>ウェブサイト 課題分析レポート</span></h1>
+  <div class="meta">
+    <div><strong>対象URL</strong>　https://www.ym-foods.co.jp/</div>
+    <div><strong>分析日</strong>　2026年4月23日</div>
+    <div><strong>調査範囲</strong>　トップページ・企業情報ページ・サイト構造全般</div>
+  </div>
+</header>
+
+<div class="summary-bar">
+  <div class="summary-stat">
+    <div class="num critical">5</div>
+    <div class="label-s">CRITICAL</div>
+  </div>
+  <div class="summary-stat">
+    <div class="num warning">6</div>
+    <div class="label-s">WARNING</div>
+  </div>
+  <div class="summary-stat">
+    <div class="num info">4</div>
+    <div class="label-s">INFO</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- 1. UX・ナビゲーション -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">UX・ナビゲーション構造</span>
+    </div>
+    <div class="issue-grid">
+      <div class="issue-card critical">
+        <div class="issue-top"><span class="badge critical">Critical</span><span class="issue-title">グローバルナビが極端に少ない</span></div>
+        <div class="issue-body">フッターにしかリンク一覧がなく、ヘッダーナビが存在しないか非常に簡素。スクロールしないとサイト構造が把握できず、直帰率の上昇につながる。</div>
+        <div class="issue-suggest">スティッキーヘッダーに主要ページへのナビを配置。モバイルはハンバーガーメニューを採用。</div>
+      </div>
+      <div class="issue-card critical">
+        <div class="issue-top"><span class="badge critical">Critical</span><span class="issue-title">BtoBとBtoCの動線が混在</span></div>
+        <div class="issue-body">OEM受託（BtoB）と自社ブランド商品購入（BtoC）が同一ページに並列されており、ターゲット別の誘導設計がない。どちらの顧客も「自分向けの情報」に辿り着きにくい。</div>
+        <div class="issue-suggest">トップページに「一般の方へ」「企業・業者の方へ」の明確な分岐を設ける。</div>
+      </div>
+      <div class="issue-card warning">
+        <div class="issue-top"><span class="badge warning">Warning</span><span class="issue-title">自社ブランドサイトへの遷移が唐突</span></div>
+        <div class="issue-body">「サン＆リブ」の商品情報が別ドメイン（sunliv.jp）に飛ぶが、その旨の案内が不明瞭。ユーザーが離脱したと感じる可能性がある。</div>
+        <div class="issue-suggest">「別サイトへ移動します」の注記＋新しいタブで開くよう設定。または情報を統合。</div>
+      </div>
+      <div class="issue-card warning">
+        <div class="issue-top"><span class="badge warning">Warning</span><span class="issue-title">Recruitリンクが果物ページ（fruit.html）を誤参照</span></div>
+        <div class="issue-body">フッターの「Recruit 採用情報」とトップページの採用セクションのリンク先が <code>fruit.html</code> になっており、採用ページ（recruit/index.html）と混在している。誤リンクの可能性あり。</div>
+        <div class="issue-suggest">全リンクのhref属性を棚卸しし、正しいURLへ修正。採用ページへ直接誘導する。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. コンテンツ・情報設計 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">コンテンツ・情報設計</span>
+    </div>
+    <div class="issue-grid">
+      <div class="issue-card critical">
+        <div class="issue-top"><span class="badge critical">Critical</span><span class="issue-title">トップに重大なネガティブ情報が露出</span></div>
+        <div class="issue-body">最新ニュース欄の最上部に「重油流出事故のお詫びとご報告」（2026年2月）が表示されている。訪問者の第一印象に深刻な影響を与え、信頼性の低下につながる。</div>
+        <div class="issue-suggest">お詫び情報は独立した専用ページへ移動し、トップのニュースは通常の営業・商品情報に切り替える。危機管理ページとして明確に分離する。</div>
+      </div>
+      <div class="issue-card warning">
+        <div class="issue-top"><span class="badge warning">Warning</span><span class="issue-title">商品情報がトップに存在しない</span></div>
+        <div class="issue-body">自社ブランド商品のビジュアルやラインナップが一切トップページに掲載されておらず、別サイトへの誘導のみ。消費者にとって最も知りたい「何を売っているか」が即座に伝わらない。</div>
+        <div class="issue-suggest">代表商品の画像カルーセルをファーストビュー近くに設置し、商品の魅力を視覚的に訴求する。</div>
+      </div>
+      <div class="issue-card warning full">
+        <div class="issue-top"><span class="badge warning">Warning</span><span class="issue-title">企業情報ページに情報が過密集中・一枚岩構造</span></div>
+        <div class="issue-body">company.html に企業理念・事業内容・会社概要・行動計画・トップメッセージ・設備概要・SDGs・沿革・アクセスが全て縦に並んでいる。アンカーリンクはあるが、情報量が多すぎてスキャンしにくく、特定情報へのアクセスに時間がかかる。また沿革テーブルは1932年から2026年まで94年分が一度に展示されており読むのが困難。</div>
+        <div class="issue-suggest">各セクションを独立したページに分割するか、タブ・アコーディオン形式でコンテンツを整理。沿革はタイムライン形式に変更し、折りたたみで詳細を展開できるようにする。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 視覚デザイン -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">視覚デザイン・ブランディング</span>
+    </div>
+    <div class="issue-grid">
+      <div class="issue-card critical">
+        <div class="issue-top"><span class="badge critical">Critical</span><span class="issue-title">ファーストビューの画像テキストが縦書きで視認性が低い</span></div>
+        <div class="issue-body">メインビジュアルのキャッチコピー「おいしいジュースをつくるのだ」が縦書きHTMLテキストで表示されており、デザイン上の意図は理解できるが、モバイルでの視認性・フォントレンダリングに問題が生じやすい。また語調も企業サイトとしてはカジュアル過ぎる印象がある。</div>
+        <div class="issue-suggest">SVGまたはWebフォントを使ったキャッチコピーに変更。ブランドトーンを統一したコピーライティングに見直す。</div>
+      </div>
+      <div class="issue-card info">
+        <div class="issue-top"><span class="badge info">Info</span><span class="issue-title">セクション見出しが英語のみで直感的でない</span></div>
+        <div class="issue-body">各セクション（Company, Work, Food Safety, Original Brand, fruits, Factory Tour, Recruit）が英語見出しのみ。日本語サイトとして、訪問者が内容を即座に把握しにくい。</div>
+        <div class="issue-suggest">英語見出し＋日本語サブタイトルのセットにして、情報の可読性を高める。</div>
+      </div>
+      <div class="issue-card info">
+        <div class="issue-top"><span class="badge info">Info</span><span class="issue-title">画像にaltテキストが設定されていない</span></div>
+        <div class="issue-body"><code>&lt;img src="..." /&gt;</code> にalt属性が空もしくは未設定の箇所が複数あり、スクリーンリーダー対応・SEOの両面で不利。</div>
+        <div class="issue-suggest">全画像に適切なalt属性を追加（例：「山形食品 アセプペット工場の製造ライン」など）。</div>
+      </div>
+      <div class="issue-card info">
+        <div class="issue-top"><span class="badge info">Info</span><span class="issue-title">インスタグラムリンクが画像のみで認識されにくい</span></div>
+        <div class="issue-body">フッター付近のInstagramへの誘導が小さな画像アイコン（insta.png）だけで、フォロワー数・最新投稿・CTAが一切ない。SNS連携として機能していない。</div>
+        <div class="issue-suggest">インスタグラムの最新フィード（埋め込み）または「フォローする」ボタンを設置し、エンゲージメントを促す。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. SEO・技術 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">SEO・技術的観点</span>
+    </div>
+    <div class="issue-grid">
+      <div class="issue-card critical">
+        <div class="issue-top"><span class="badge critical">Critical</span><span class="issue-title">メタ情報・構造化データの不足</span></div>
+        <div class="issue-body">OGP（Open Graph Protocol）タグ・Twitter Cardの設定が確認できない。SNSでシェアされた際に正しいサムネイルやタイトルが表示されない。また検索結果に表示されるdescriptionの最適化が不十分。</div>
+        <div class="issue-suggest">全ページにOGP/Twitter Cardタグを追加。meta descriptionは各ページの内容に合わせた120〜160字の文言を設定。</div>
+      </div>
+      <div class="issue-card warning">
+        <div class="issue-top"><span class="badge warning">Warning</span><span class="issue-title">ページ読み込み速度の懸念</span></div>
+        <div class="issue-body">トップページのメイン画像（top-main.jpg）がそのままJPGで配信されている可能性があり、WebP形式への変換・遅延読み込みが実装されているか不明。飲料製造業の競合サイトと比較してパフォーマンスが劣後している可能性。</div>
+        <div class="issue-suggest">画像をWebP形式に変換、<code>loading="lazy"</code>属性を追加。PageSpeed Insightsで定期計測を行う。</div>
+      </div>
+      <div class="issue-card warning">
+        <div class="issue-top"><span class="badge warning">Warning</span><span class="issue-title">URLのエンコード問題（日本語URL）</span></div>
+        <div class="issue-body">ニュース記事のURLが日本語をパーセントエンコードした長い文字列になっている（例：<code>/ynews/blog/2026/02/19/%e9%87%8d%e6%b2%b9...</code>）。シェア・引用時の可読性が低く、SEOの観点からも英数字スラッグが推奨される。</div>
+        <div class="issue-suggest">WordPressのパーマリンク設定を「投稿名（英数字）」形式に変更。既存URLはリダイレクト設定で保護する。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 優先度まとめ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">対応優先度マトリクス</span>
+    </div>
+    <table class="priority-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>課題</th>
+          <th>優先度</th>
+          <th>難易度</th>
+          <th>効果</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>重油事故お詫びをトップから除去・専用ページに移動</td>
+          <td><span class="tag high">最優先</span></td>
+          <td><span class="tag quick">Easy</span></td>
+          <td>信頼性・第一印象の即時回復</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>採用ページのリンク誤り修正</td>
+          <td><span class="tag high">最優先</span></td>
+          <td><span class="tag quick">Easy</span></td>
+          <td>採用機会損失の防止</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>ヘッダーナビの追加（スティッキー）</td>
+          <td><span class="tag high">高</span></td>
+          <td><span class="tag mid">Medium</span></td>
+          <td>直帰率低下・回遊性向上</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>BtoB/BtoC動線の分離</td>
+          <td><span class="tag high">高</span></td>
+          <td><span class="tag mid">Medium</span></td>
+          <td>コンバージョン率向上</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>商品ビジュアルのトップページ追加</td>
+          <td><span class="tag high">高</span></td>
+          <td><span class="tag mid">Medium</span></td>
+          <td>消費者の興味喚起・離脱防止</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>OGP・メタdescription整備</td>
+          <td><span class="tag mid">中</span></td>
+          <td><span class="tag quick">Easy</span></td>
+          <td>SEO・SNSシェア改善</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>企業情報ページのコンテンツ分割・整理</td>
+          <td><span class="tag mid">中</span></td>
+          <td><span class="tag high">Hard</span></td>
+          <td>UX改善・情報アクセス性向上</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>画像altテキスト・WebP化</td>
+          <td><span class="tag mid">中</span></td>
+          <td><span class="tag quick">Easy</span></td>
+          <td>アクセシビリティ・SEO・表示速度</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>ニュースURL（日本語スラッグ）の英数字化</td>
+          <td><span class="tag low">低</span></td>
+          <td><span class="tag mid">Medium</span></td>
+          <td>SEO・URL可読性の長期的改善</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Instagram埋め込みフィードの設置</td>
+          <td><span class="tag low">低</span></td>
+          <td><span class="tag quick">Easy</span></td>
+          <td>SNSエンゲージメント向上</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>
+  山形食品株式会社 ウェブサイト 課題分析レポート　|　作成日：2026年4月23日
+</footer>
+
+</body>
+</html>
